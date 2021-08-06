@@ -1,4 +1,4 @@
-# Object-Relation Mapping
+# Sequelize CLI and 1:many associations
 
 ### Quickstart
 ```sh
@@ -54,7 +54,19 @@ $ npx sequelize-cli db:migrate
 To create the table associations using sequelize,
 
 1. Use sequelize-cli to generate a model for Comment, with attributes `text:string,CatId:integer`
-2. Edit the migration file to specify that `CatId` is a foreign key by adding a reference to the `Cats` table primary key (`id`)
+2. Edit the generated migration file to specify that `CatId` is a foreign key by adding a reference to the `Cats` table primary key (`id`)
+```js
+CatId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Cats'
+          },
+          key: 'id'
+        },
+        allowNull: false
+      }
+```
 3. Run the migration
 4. Set properties on the model with values of the invoked association methods so that sequelize associates the models
 
