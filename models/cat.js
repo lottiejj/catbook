@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.Comments = this.hasMany(models.Comment, { onDelete: 'cascade' })
+      this.Owner = this.belongsTo(models.Owner)
     }
   };
   Cat.init({
     name: DataTypes.STRING,
     breed: DataTypes.STRING,
-    owner: DataTypes.STRING
+    OwnerId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Cat',

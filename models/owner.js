@@ -3,23 +3,22 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Comment extends Model {
+  class Owner extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.Cat = this.belongsTo(models.Cat)
-      this.Owner = this.belongsTo(models.Owner)
+      this.Comments = this.hasMany(models.Comment, { onDelete: 'cascade' })
+      this.Cats = this.hasMany(models.Cat, { onDelete: 'cascade' })
     }
   };
-  Comment.init({
-    text: DataTypes.STRING,
-    CatId: DataTypes.INTEGER
+  Owner.init({
+    name: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Comment',
+    modelName: 'Owner',
   });
-  return Comment;
+  return Owner;
 };
