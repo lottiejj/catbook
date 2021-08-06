@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>CATS</h1>
+
+    <div id="cats-list">
+      <% cats.map((cat, index) => { %>
+        <div id="cat-<%= index %>">
+          <p>Name: <%= cat.name %></p>
+          <p>Breed: <%= cat.breed %></p>
+          <p>Owner: <%= cat.owner %></p>
+          <form action="/cats/<%= cat.id %>?_method=DELETE" method="post">
+            <input id="cat-<%= index %>-delete" type="submit" value="delete">
+          </form>
+
+          <div id="cat-<%= index %>-comments">
+            <form action="/cats/<%= cat.id %>/comments" method="post">
+              <input id="cat-<%= index %>-comment-textbox" type="text" name="text">
+              <input id="cat-<%= index %>-comment-submit"type="submit" value="post">
+            </form>
+            <% cat.Comments.map((comment, commentIndex) => { %>
+              <p id="cat-<%= index %>-comment-<%= commentIndex %>" ><%= comment.text %></p>
+            <% }) %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <form action="/cats" method="post">
+      <input id="name" type="text" name="name" placeholder="name">
+      <input id="breed" type="text" name="breed" placeholder="breed">
+      <input id="owner" type="text" name="owner" placeholder="owner">
+      <input id="submit-button" type="submit" value="CREATE CAT!">
+    </form>
+  </body>
+</html>
