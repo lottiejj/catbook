@@ -2,6 +2,7 @@
 
 ### Quickstart
 ```sh
+$ git clone git@github.com:digital-futures-academy/catbook.git && cd catbook
 $ npm install
 
 # after db setup
